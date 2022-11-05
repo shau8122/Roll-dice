@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dice Roll</title>
+  <style>
+    body {
+      background-color: rgb(133, 230, 127);
+    }
+
+    .dice-roll {
+      position: relative;
+      margin-top: 100px;
+    }
+
+    .declaration {
+      text-align: center;
+      color: rgb(191, 39, 12);
+      padding: 50px 0 50px 0;
+    }
+
+    h1 {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 2.5rem;
+      font-weight: 900;
+      text-decoration: underline;
+    }
+
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .dice-image {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 50px;
+    }
+
+    .images {
+      margin: 15px;
+    
+      width: 15%;
+    }
+
+    #draw {
+      display: none;
+    }
+
+    #player-1-win {
+      display: none;
+    }
+
+    #player-2-win {
+      display: none;
+    }
+
+    .btn {
+      margin: 40px auto;
+      position: absolute;
+      padding: 10px 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 20px;
+      color: white;
+      font-size: 1.5rem;
+      background-color: rgb(18, 18, 229);
+    }
+
+    .btn:hover {
+      background-color: rgb(26, 26, 69);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dice-roll">
+    <div class="declaration">
+      <h1 id="roll-the-dice">Roll The Dice</h1>
+      <h1 id="draw">Draw</h1>
+      <h1 id="player-1-win">&#x25B6; Player 1 Win</h1>
+      <h1 id="player-2-win">Player 2 Win &#x25B6;</h1>
+    </div>
+    <div class="dice-image">
+      <div class="images">
+        <img src="images/dice1.png" alt="" id="player-1">
+      </div>
+      <div class="images">
+        <img src="images/dice1.png" alt="" id="player-2">
+      </div>
+    </div>
+    <button class="btn" onclick="changeRoll()">Roll Dice</button>
+  </div>
+  <script>
+    let rollText=document.getElementById("roll-the-dice");
+    let player1win= document.getElementById("player-1-win");
+    let player2win= document.getElementById("player-2-win");
+    let drawRoll= document.getElementById("draw");
+    let image = document.querySelector(".dice-image");
+    let dice1 = document.getElementById("player-1");
+    let dice2 = document.getElementById("player-2");
+    let diceImage = [dice1, dice2];
+    function changeSrc(num, index) {
+      switch (num) {
+        case 1: diceImage[index].src = "images/dice1.png";
+          break;
+        case 2: diceImage[index].src = "images/dice2.png";
+          break;
+        case 3: diceImage[index].src = "images/dice3.png";
+          break;
+        case 4: diceImage[index].src = "images/dice4.png";
+          break;
+        case 5: diceImage[index].src = "images/dice5.png";
+          break;
+        case 6: diceImage[index].src = "images/dice6.png";
+          break;
+        default:
+          break;
+      }
+    }
+    function changeRoll() {
+      let x = Math.floor(Math.random() * 6 + 1);
+      let y = Math.floor(Math.random() * 6 + 1);
+      changeSrc(x, 0);
+      changeSrc(y, 1);
+      if(x>y){
+        rollText.style.display="none";
+        player1win.style.display="block";
+        player2win.style.display="none";
+        draw.style.display="none";
+      }
+      else  if(x<y){
+      rollText.style.display="none";
+      player1win.style.display="none";
+      player2win.style.display="block";
+      draw.style.display="none";
+    }
+    else {
+      rollText.style.display="none";
+        player1win.style.display="none";
+        player2win.style.display="none";
+        draw.style.display="block";
+      }
+    }
+  </script>
+</body>
+
+</html>
